@@ -1,5 +1,12 @@
 import processing.sound.*;
 
+int cols;
+int rows;
+float[][] current;
+float[][] previous;
+
+float dampening = 0.91;
+
 Sound sound;
 SinOsc pulse1;
 SinOsc pulse2;
@@ -19,10 +26,14 @@ void setup() {
   pulse2 = new SinOsc(this);
   env = new Env(this);
   LP = new LowPass(this); 
+  cols = width;
+  rows = height;
+  current = new float[cols][rows];
+  previous = new float[cols][rows];
 }
 
 void draw() {
   background(0);
   update(mouseX, mouseY);
-  
+  drawRipple();
 }
